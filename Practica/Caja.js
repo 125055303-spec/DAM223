@@ -1,19 +1,27 @@
-let pedidos =[];
+let pedidos = [];
 let totalAcumulado = 0;
 
-function agregarPedido(producto,precio){ 
-    pedidos[pedidos.length]={
-        producto:producto,
-        precio:precio
-    }
+// Función para agregar un pedido
+function agregarPedido(producto, precio) {
+    let nuevoPedido = {
+        producto: producto,
+        precio: precio
+    };
+
+    pedidos.push(nuevoPedido);
     totalAcumulado += precio;
 }
-agregarPedido("Matcha Latte Helado",100);
+
+// Agregar productos a los pedidos del cliente
+agregarPedido("Matcha Latte Helado", 100);
 agregarPedido("Caramel Frappuccino", 95);
+agregarPedido("Cheesecake de Fresa", 85);
 
-// Mostrar los pedidos en la página
+// Obtener elementos de la página
 let lista = document.getElementById("listaPedidos");
+let total = document.getElementById("total");
 
+// Mostrar los pedidos del cliente
 for (let i = 0; i < pedidos.length; i++) {
     let pedido = document.createElement("p");
 
@@ -23,6 +31,5 @@ for (let i = 0; i < pedidos.length; i++) {
     lista.appendChild(pedido);
 }
 
-// Mostrar el total
-document.getElementById("total").textContent =
-    "Total acumulado: $" + totalAcumulado;
+// Mostrar el total acumulado
+total.textContent = "Total acumulado: $" + totalAcumulado;
