@@ -1,7 +1,7 @@
 let pedidos = [];
 let totalAcumulado = 0;
 
-// Función para agregar un pedido
+// Agregar un pedido
 function agregarPedido(producto, precio) {
     let nuevoPedido = {
         producto: producto,
@@ -17,7 +17,6 @@ agregarPedido("Matcha Latte Helado", 100);
 agregarPedido("Caramel Frappuccino", 95);
 agregarPedido("Cheesecake de Fresa", 85);
 
-// Obtener elementos de la página
 let lista = document.getElementById("listaPedidos");
 let total = document.getElementById("total");
 
