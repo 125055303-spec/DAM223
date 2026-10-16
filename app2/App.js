@@ -14,7 +14,10 @@ export default function App() {
       <Image source={require('./assets/wave.png')} /> 
       <Saludo />
       <Saludo2 />
-      <Perfil />
+      <Perfil nombre="Ashley López" 
+      carrera="Tecnologías de la Información" 
+      materia="Móvil" 
+      cuatri="4">  </Perfil>
 
       <StatusBar style="auto" />
     </View>
