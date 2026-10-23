@@ -23,12 +23,17 @@ export default function MenuScreen() {
     case 'tarjetas':
     return <TarjetasScreen />;
     case 'text':
-      return <TextInput />;
+      return <TextInputScreen />;
     case 'list1':
-      return <FlatList1 />;
-    case 'list2'
-      
-
+      return <FlatList1Screen />;
+    case 'list2':
+      return <FlatList2Screen />;
+    case 'modal':
+      return <ModalScreen/>;
+    case 'image':
+      return <ImageBackgroundScreen/>;
+    case 'activity':
+      return <ActivityIndicatorScreen/>;
     case 'menu':
   default: 
     return (
@@ -37,6 +42,12 @@ export default function MenuScreen() {
       <Button title="Practica Tarjetas" onPress={() => setScreen('tarjetas')} />
       <Button title="Practica SafeAreaView" onPress={() => setScreen('safe')} />
       <Button title="Practica Pressable" onPress={() => setScreen('press')} />
+      <Button title="Practica TextInput" onPress={() => setScreen('text')} />
+      <Button title="Practica FlatList1" onPress={() => setScreen('list1')} />
+      <Button title="Practica FlatList2" onPress={() => setScreen('list2')} />
+      <Button title="Practica Modal" onPress={() => setScreen('modal')} />
+      <Button title="Practica ImageBackground" onPress={() => setScreen('image')} />
+      <Button title="Practica ActivityIndicator" onPress={() => setScreen('activity')} />
     </View>
   );
 
