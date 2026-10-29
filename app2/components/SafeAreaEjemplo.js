@@ -1,5 +1,5 @@
-import {use, useState} from "react";
-import {Button, StyleSheet} from "react-native";
+import {useState} from "react";
+import {Button, StyleSheet, Text} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SafeAreaEjemplo() {

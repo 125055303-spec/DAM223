@@ -52,13 +52,13 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
     },
     tarjeta1: {
-        backgroundColor: '#c3e3ae',
+        backgroundColor: '#c3f99e',
         padding: 25,
         marginBottom: 10,
         borderRadius: 8,
     },
     tarjeta2: {
-        backgroundColor: '#f8abe3',
+        backgroundColor: '#f8d9ab',
         padding: 25,
         marginBottom: 10,
         borderRadius: 8,
