@@ -1,38 +1,115 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Screen } from '../components/components';
-import { C } from '../theme';
 
-const items = [['INICIO', 'home-outline'], ['CURSOS', 'ribbon'], ['USUARIOS', 'people'], ['REPORTES', 'newspaper'], ['SOLICITUDES', 'mail'], ['GRÁFICAS', 'stats-chart']];
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet
+} from 'react-native';
 
-export default function MenuScreen() {
+import { Screen, Img } from '../components/components';
+
+export default function MenuScreen({ cambiarPantalla }) {
+
   return (
-    <Screen header={false} scroll={false}>
-      <View style={{ flex: 1, flexDirection: 'row' }}>
-        <View style={s.drawer}>
-          {items.map(([l, i]) => (
-            <View key={l} style={s.item}>
-              <View style={s.ico}><Ionicons name={i} size={22} color={C.orange} /></View>
-              <Text style={s.lbl}>{l}</Text>
-            </View>
-          ))}
+    <Screen cambiarPantalla={cambiarPantalla} header={false}>
+
+      <View style={{ height: 690 }}>
+
+        <View style={{ position: 'absolute', top: 14, right: 0 }}>
+
+          <Pressable onPress={() => cambiarPantalla('MiPerfil')}>
+            <Img
+              src={null}
+              label="Perfil"
+              style={{ width: 44, height: 44, borderRadius: 22 }}
+            />
+          </Pressable>
+
+        </View>
+
+        <View style={s.panel}>
+
+          <Pressable style={s.item} onPress={() => cambiarPantalla('Inicio')}>
+            <Img src={null} label="Casa" style={s.ico} />
+            <Text style={s.txt}>INICIO</Text>
+          </Pressable>
+
+          <Pressable style={s.item} onPress={() => cambiarPantalla('Cursos')}>
+            <Img src={null} label="Curso" style={s.ico} />
+            <Text style={s.txt}>CURSOS</Text>
+          </Pressable>
+
+          <Pressable style={s.item} onPress={() => cambiarPantalla('Usuarios')}>
+            <Img src={null} label="Usuarios" style={s.ico} />
+            <Text style={s.txt}>USUARIOS</Text>
+          </Pressable>
+
+          <Pressable style={s.item} onPress={() => cambiarPantalla('Reportes')}>
+            <Img src={null} label="Reportes" style={s.ico} />
+            <Text style={s.txt}>REPORTES</Text>
+          </Pressable>
+
+          <Pressable style={s.item} onPress={() => cambiarPantalla('Solicitudes')}>
+            <Img src={null} label="Sobre" style={s.ico} />
+            <Text style={s.txt}>SOLICITUDES</Text>
+          </Pressable>
+
+          <Pressable style={s.item} onPress={() => cambiarPantalla('Graficas')}>
+            <Img src={null} label="Gráfica" style={s.ico} />
+            <Text style={s.txt}>GRÁFICAS</Text>
+          </Pressable>
+
           <View style={{ flex: 1 }} />
-          <View style={s.item}>
-            <View style={s.ico}><Ionicons name="log-out" size={26} color={C.orange} /></View>
-            <Text style={s.lbl}>CERRAR SESIÓN</Text>
-          </View>
+
+          <Pressable style={s.item} onPress={() => cambiarPantalla('Login')}>
+            <Img src={null} label="Salir" style={s.ico} />
+            <Text style={s.txt}>CERRAR SESIÓN</Text>
+          </Pressable>
+
         </View>
-        <View style={{ flex: 1, alignItems: 'flex-end', padding: 14 }}>
-          <Ionicons name="person-circle-outline" size={52} color={C.orange} />
-        </View>
+
       </View>
+
     </Screen>
   );
 }
+
 const s = StyleSheet.create({
-  drawer: { width: '58%', backgroundColor: C.orange, borderTopRightRadius: 26, borderBottomRightRadius: 26, padding: 8, marginVertical: 8 },
-  item: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#FF6F00', borderRadius: 16, padding: 8, marginBottom: 8 },
-  ico: { width: 36, height: 36, borderRadius: 18, backgroundColor: C.white, alignItems: 'center', justifyContent: 'center' },
-  lbl: { color: C.white, fontWeight: '700', fontSize: 14, marginLeft: 10 },
+
+  panel: {
+    position: 'absolute',
+    left: -22,
+    top: 14,
+    bottom: 0,
+    width: 292,
+    backgroundColor: '#F28C28',
+    borderRadius: 18,
+    padding: 10
+  },
+
+  item: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#E85D00',
+    borderRadius: 10,
+    padding: 6,
+    marginBottom: 8
+  },
+
+  ico: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#FFFFFF',
+    marginRight: 10
+  },
+
+  txt: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+    fontSize: 13
+  }
+
 });

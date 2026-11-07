@@ -1,112 +1,211 @@
 import React from 'react';
-import { View, Text, TextInput, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { C, shadow } from '../theme';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, StyleSheet } from 'react-native';
 
-export const Screen = ({ children, header = true, scroll = true }) => {
-  const Body = scroll ? ScrollView : View;
-  return (
-    <View style={s.root}>
-      <View style={s.status}><Text style={s.time}>11:07</Text><Ionicons name="wifi" size={14} color={C.text} /></View>
-      <Body style={{ flex: 1 }} contentContainerStyle={{ padding: 22, paddingBottom: 40 }}>
-        {header && (
-          <View style={s.header}>
-            <Ionicons name="menu" size={46} color={C.orange} />
-            <Ionicons name="person-circle-outline" size={52} color={C.orange} />
-          </View>
-        )}
-        {children}
-      </Body>
-      <View style={s.footer}><View style={s.handle} /></View>
-    </View>
-  );
+export const C = {
+  orange: '#FF7F00', bg: '#FFF1DC', band: '#FFDDB8', card: '#FFFFFF', line: '#F3D9B8',
+  text: '#111111', blue: '#5B9CF6', green: '#2FB44F', red: '#E23B3B', soft: '#FFB066', star: '#F5B301',
 };
 
-export const Title = ({ children, sub }) => (
-  <View style={{ marginBottom: 14 }}>
-    <Text style={s.title}>{children}</Text>
-    {sub ? <Text style={s.sub}>{sub}</Text> : null}
-  </View>
-);
+// Cuando src = null muestra un recuadro; cuando pongas require('../assets/archivo.png') muestra la imagen.
+export function Img({ src, label, style }) {
+  if (src) return <Image source={src} style={style} resizeMode="contain" />;
+  return (
+    <View style={[s.ph, style]}>
+      <Text style={s.phTxt}>{label}</Text>
+    </View>
+  );
+}
 
-export const Chips = ({ items, active }) => (
+// Marco de cada pantalla: barra de hora, botón de menú, perfil y contenido con scroll
+export function Screen({ go, children, header = true }) {
+  return (
+    <View style={s.phone}>
+      <View style={s.status}><Text style={s.time}>11:07</Text></View>
+      {header && (
+        <View style={s.header}>
+          <TouchableOpacity onPress={() => go('Menu')}>
+            <View style={s.bar} /><View style={s.bar} /><View style={s.bar} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => go('MiPerfil')}>
+            {/* src: icono de perfil de usuario (arriba a la derecha) → require('../assets/perfil.png') */}
+            <Img src={null} label="Perfil" style={{ width: 44, height: 44, borderRadius: 22 }} />
+          </TouchableOpacity>
+        </View>
+      )}
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingHorizontal: 22, paddingBottom: 24 }}>
+        {children}
+      </ScrollView>
+      <View style={s.navBand}><View style={s.navPill} /></View>
+    </View>
+  );
+}
+
+export const Title = ({ children }) => <Text style={s.title}>{children}</Text>;
+export const Sub = ({ children }) => <Text style={s.sub}>{children}</Text>;
+
+export const Card = ({ children, style }) => <View style={[s.card, style]}>{children}</View>;
+
+export const Chips = ({ items }) => (
   <View style={s.chips}>
     {items.map((t) => (
-      <View key={t} style={[s.chip, active === t && s.chipActive]}><Text style={s.chipTxt}>{t}</Text></View>
+      <TouchableOpacity key={t} style={s.chip}><Text style={s.chipTxt}>{t}</Text></TouchableOpacity>
     ))}
   </View>
 );
 
-export const Search = ({ placeholder }) => (
-  <View style={[s.search, shadow]}>
-    <TextInput style={{ flex: 1, color: C.text }} placeholder={placeholder} placeholderTextColor="#B9B9B9" editable={false} />
-    <View style={s.searchBtn}><Ionicons name="search" size={22} color={C.white} /></View>
+export const SearchBar = ({ placeholder }) => (
+  <View style={s.search}>
+    <TextInput style={s.searchInput} placeholder={placeholder} placeholderTextColor="#999" />
+    <TouchableOpacity style={s.searchBtn}>
+      {/* src: icono de lupa (buscar) → require('../assets/lupa.png') */}
+      <Img src={null} label="Lupa" style={{ width: 22, height: 22 }} />
+    </TouchableOpacity>
   </View>
 );
 
-export const Card = ({ children, style }) => <View style={[s.card, shadow, style]}>{children}</View>;
-
-export const Stars = ({ n }) => (
-  <View style={{ flexDirection: 'row' }}>
-    {[1, 2, 3, 4].map((i) => <Ionicons key={i} name={i <= n ? 'star' : 'star-outline'} size={22} color="#FFB800" />)}
-  </View>
-);
-
-export const BarChart = ({ data, max, height = 150 }) => (
-  <Card style={{ padding: 14 }}>
-    <View style={{ flexDirection: 'row', alignItems: 'flex-end', height, justifyContent: 'space-between' }}>
-      {data.map(([label, v]) => (
-        <View key={label} style={{ flex: 1, alignItems: 'center' }}>
-          <View style={{ width: '78%', height: (v / max) * height, backgroundColor: C.chart, borderRadius: 8 }} />
-        </View>
-      ))}
+// Gráfica de barras sencilla (solo visual)
+export const BarChart = ({ data, ticks, max }) => (
+  <Card style={{ padding: 12 }}>
+    <View style={{ flexDirection: 'row', height: 150 }}>
+      <View style={{ justifyContent: 'space-between', marginRight: 6 }}>
+        {ticks.map((t) => <Text key={t} style={s.tick}>{t}</Text>)}
+      </View>
+      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+        {data.map(([l, v]) => (
+          <View key={l} style={{ width: '17%', alignItems: 'center', justifyContent: 'flex-end', height: '100%' }}>
+            <View style={{ width: '100%', height: (v / max) * 150, backgroundColor: C.blue, borderTopLeftRadius: 4, borderTopRightRadius: 4 }} />
+          </View>
+        ))}
+      </View>
     </View>
-    <View style={{ flexDirection: 'row', marginTop: 6 }}>
-      {data.map(([label]) => <Text key={label} numberOfLines={1} style={s.axis}>{label}</Text>)}
+    <View style={{ flexDirection: 'row', marginLeft: 26, justifyContent: 'space-between', marginTop: 4 }}>
+      {data.map(([l]) => <Text key={l} style={[s.tick, { width: '17%', textAlign: 'center' }]}>{l}</Text>)}
     </View>
   </Card>
 );
 
-export const LineChart = ({ values, labels, w = 250, h = 110 }) => {
-  const min = Math.min(...values), max = Math.max(...values), dx = w / (values.length - 1);
-  const pts = values.map((v, i) => ({ x: i * dx, y: h - ((v - min) / (max - min)) * h }));
-  return (
-    <Card style={{ padding: 18 }}>
-      <View style={{ width: w, height: h, alignSelf: 'center', marginVertical: 8 }}>
-        {pts.slice(1).map((p, i) => {
-          const a = pts[i], len = Math.hypot(p.x - a.x, p.y - a.y), ang = Math.atan2(p.y - a.y, p.x - a.x);
-          return <View key={i} style={{ position: 'absolute', left: (a.x + p.x) / 2 - len / 2, top: (a.y + p.y) / 2, width: len, height: 2, backgroundColor: C.chart, transform: [{ rotate: `${ang}rad` }] }} />;
-        })}
-        {pts.map((p, i) => <View key={i} style={{ position: 'absolute', left: p.x - 3, top: p.y - 3, width: 7, height: 7, borderRadius: 4, backgroundColor: C.chart }} />)}
-      </View>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        {labels.map((l) => <Text key={l} style={s.axis}>{l}</Text>)}
-      </View>
-    </Card>
-  );
-};
-
-export const OrangeButton = ({ label }) => (
-  <TouchableOpacity activeOpacity={1} style={s.btn}><Text style={s.btnTxt}>{label}</Text></TouchableOpacity>
-);
+export { View, Text, TouchableOpacity, TextInput };
 
 const s = StyleSheet.create({
-  root: { flex: 1, backgroundColor: C.bg },
-  status: { height: 34, backgroundColor: C.bar, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 18 },
-  time: { fontSize: 12, fontWeight: '600', color: C.text },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 22 },
-  title: { fontSize: 30, color: C.orange, fontWeight: '500' },
-  sub: { fontSize: 15, color: C.text, fontWeight: '500', marginTop: 4 },
-  chips: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 },
-  chip: { backgroundColor: C.orange, paddingVertical: 7, paddingHorizontal: 16, borderRadius: 16 },
-  chipActive: { borderWidth: 2, borderColor: '#C75F00' },
-  chipTxt: { color: C.white, fontWeight: '600', fontSize: 13 },
-  search: { flexDirection: 'row', alignItems: 'center', backgroundColor: C.white, borderRadius: 28, paddingLeft: 18, paddingRight: 6, height: 52, marginBottom: 20 },
-  searchBtn: { width: 40, height: 40, borderRadius: 20, backgroundColor: C.orange, alignItems: 'center', justifyContent: 'center' },
-  card: { backgroundColor: C.white, borderRadius: 22, padding: 16, marginBottom: 18 },
-  axis: { flex: 1, fontSize: 9, color: '#777', textAlign: 'center' },
-  btn: { backgroundColor: C.orange, borderRadius: 30, paddingVertical: 16, alignItems: 'center' },
-  btnTxt: { color: C.white, fontSize: 18, fontWeight: '600' },
-  footer: { height: 44, backgroundColor: C.bar, alignItems: 'center', justifyContent: 'center' },
-  handle: { width: 110, height: 4, borderRadius: 2, backgroundColor: C.text },
+  phone: { 
+    flex: 1, 
+    backgroundColor: C.bg 
+  },
+  status: {
+     height: 34, 
+     backgroundColor: C.band, 
+     justifyContent: 'center', 
+     paddingHorizontal: 18 
+    },
+  time: { 
+    fontSize: 11, 
+    color: '#222' 
+  },
+  header: {
+     flexDirection: 'row', 
+     justifyContent: 'space-between', 
+     alignItems: 'center',
+      paddingHorizontal: 22, 
+      paddingVertical: 14 
+    },
+  bar: { 
+    width: 38, 
+    height: 6, 
+    borderRadius: 3, 
+    backgroundColor: C.orange,
+     marginVertical: 3 
+    },
+  navBand: {
+     height: 40,
+      backgroundColor: C.band,
+       alignItems: 'center', 
+       justifyContent: 'center' 
+      },
+  navPill: {
+     width: 110, 
+     height: 4, 
+     borderRadius: 2,
+      backgroundColor: '#222'
+     },
+  title: { 
+    fontSize: 30, 
+    fontWeight: '700', 
+    color: C.orange, 
+    marginTop: 8,
+     marginBottom: 8 
+    },
+  sub: { 
+    fontSize: 14, 
+    fontWeight: '600', 
+    color: C.text,
+     marginBottom: 10 
+    },
+  card: { 
+    backgroundColor: C.card,
+     borderRadius: 16, 
+     padding: 16, 
+     borderWidth: 1,
+      borderColor: C.line,
+       marginBottom: 14 
+      },
+  chips: {
+     flexDirection: 'row', 
+     flexWrap: 'wrap', 
+     gap: 8, 
+     marginVertical: 12
+     },
+  chip: { 
+    backgroundColor: C.orange,
+     borderRadius: 16, 
+     paddingVertical: 6, 
+     paddingHorizontal: 16 
+    },
+  chipTxt: { 
+    color: '#fff', 
+    fontWeight: '600',
+     fontSize: 13 
+    },
+  search: { 
+    flexDirection: 'row', 
+    alignItems: 'center',
+   backgroundColor: '#fff', 
+   borderRadius: 24, 
+   borderWidth: 1, 
+   borderColor: C.line, 
+   paddingLeft: 16,
+    marginBottom: 14 
+  },
+  searchInput: { 
+    flex: 1, 
+    height: 40,
+    fontSize: 13, 
+    color: C.text, 
+    outlineStyle: 'none'
+   },
+  searchBtn: {
+     width: 36,
+      height: 36,
+       borderRadius: 18,
+        backgroundColor: C.orange, 
+        alignItems: 'center',
+         justifyContent: 'center',
+          margin: 3
+         },
+  tick: { 
+    fontSize: 8, 
+    color: '#666' 
+  },
+  ph: {
+     borderWidth: 1.5,
+      borderStyle: 'dashed',
+      borderColor: C.orange, 
+      backgroundColor: 'rgba(255,127,0,0.08)',
+       alignItems: 'center', 
+       justifyContent: 'center' },
+  phTxt: {
+     fontSize: 9, 
+     color: C.orange, 
+     textAlign: 'center',
+      fontWeight: '600' 
+    },
 });

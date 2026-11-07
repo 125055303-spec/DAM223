@@ -1,29 +1,123 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Screen, OrangeButton } from '../components/components';
-import { C } from '../theme';
 
-export default function LoginScreen() {
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  StyleSheet
+} from 'react-native';
+
+import { Screen, Img } from '../components/components';
+
+export default function LoginScreen({ cambiarPantalla }) {
+
   return (
-    <Screen header={false}>
-      <View style={{ alignItems: 'center', marginTop: 30, marginBottom: 50 }}>
-        <Ionicons name="person-circle-outline" size={170} color={C.orange} />
+    <Screen cambiarPantalla={cambiarPantalla} header={false}>
+
+      <View style={{
+        alignItems: 'center',
+        marginTop: 40,
+        marginBottom: 40
+      }}>
+
+        <Img
+          src={null}
+          label="Logo / icono de usuario"
+          style={{ width: 170, height: 170, borderRadius: 85 }}
+        />
+
       </View>
-      <TextInput style={s.input} placeholder="Nombre de Usuario" placeholderTextColor={C.orange} editable={false} />
-      <TextInput style={s.input} placeholder="Contraseña" placeholderTextColor={C.orange} secureTextEntry editable={false} />
-      <View style={s.row}>
-        <Ionicons name="checkbox" size={28} color={C.orange} />
-        <Text style={s.remember}>Recuérdame</Text>
+
+      <Text style={s.label}>Nombre de Usuario</Text>
+
+      <TextInput style={s.input} />
+
+      <Text style={s.label}>Contraseña</Text>
+
+      <TextInput
+        style={s.input}
+        secureTextEntry
+      />
+
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 18
+      }}>
+
+        <View style={s.check}>
+          <Text style={{ color: '#fff', fontWeight: '700' }}>✓</Text>
+        </View>
+
+        <Text style={s.label2}>Recuérdame</Text>
+
       </View>
-      <OrangeButton label="Regístrate" />
-      <Text style={s.forgot}>¿Olvidaste tu contraseña?</Text>
+
+      <Pressable
+        style={s.btn}
+        onPress={() => cambiarPantalla('Inicio')}
+      >
+        <Text style={s.btnTxt}>Regístrate</Text>
+      </Pressable>
+
+      <Text style={s.link}>¿Olvidaste tu contraseña?</Text>
+
     </Screen>
   );
 }
+
 const s = StyleSheet.create({
-  input: { borderBottomWidth: 1, borderBottomColor: C.border, color: C.orange, fontSize: 16, paddingVertical: 12, marginBottom: 14 },
-  row: { flexDirection: 'row', alignItems: 'center', marginVertical: 14 },
-  remember: { color: C.orange, fontSize: 16, marginLeft: 8 },
-  forgot: { color: C.orange, textAlign: 'center', marginTop: 18, fontSize: 15 },
+
+  label: {
+    color: '#F28C28',
+    fontSize: 15,
+    marginTop: 18
+  },
+
+  input: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#F8C58A',
+    height: 36,
+    fontSize: 15,
+    color: '#333333'
+  },
+
+  check: {
+    width: 24,
+    height: 24,
+    borderRadius: 4,
+    backgroundColor: '#F28C28',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10
+  },
+
+  label2: {
+    color: '#F28C28',
+    fontSize: 15
+  },
+
+  btn: {
+    backgroundColor: '#F28C28',
+    borderRadius: 26,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 34
+  },
+
+  btnTxt: {
+    color: '#fff',
+    fontSize: 19,
+    fontWeight: '600'
+  },
+
+  link: {
+    color: '#F28C28',
+    textAlign: 'center',
+    marginTop: 18,
+    fontSize: 15
+  }
+
 });

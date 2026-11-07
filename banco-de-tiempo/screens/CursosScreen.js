@@ -1,43 +1,141 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Screen, Title, Search, Card } from '../components/components';
-import { C } from '../theme';
 
-const cursos = [
-  { t: 'Inteligencia Artificial y productividad', d: 'Aprende los aspectos básicos de la IA para impulsar tu productividad diaria.', icon: 'hardware-chip-outline' },
-  { t: 'Aprende sobre la programación orientada a objetos', d: 'Aprende los fundamentos de la Programación Orientada a Objetos para mejorar tus habilidades de programación y crear aplicaciones de manera estructurada.', icon: 'cube-outline' },
-];
-const Action = ({ icon, label }) => (
-  <View style={{ alignItems: 'center', marginLeft: 16 }}>
-    <Ionicons name={icon} size={22} color={C.orange} /><Text style={s.act}>{label}</Text>
-  </View>
-);
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet
+} from 'react-native';
 
-export default function CursosScreen() {
+import {
+  Screen,
+  Title,
+  SearchBar,
+  Card,
+  Img
+} from '../components/components';
+
+export default function CursosScreen({ cambiarPantalla }) {
+
   return (
-    <Screen>
+    <Screen cambiarPantalla={cambiarPantalla}>
+
       <Title>Gestionar Cursos</Title>
-      <Search placeholder="Buscar por categoría" />
-      {cursos.map((c) => (
-        <Card key={c.t} style={{ padding: 0, overflow: 'hidden' }}>
-          <View style={s.cover}><Ionicons name={c.icon} size={74} color={C.orangeSoft} /></View>
-          <View style={{ padding: 14 }}>
-            <Text style={s.name}>{c.t}</Text>
-            <Text style={s.desc}>{c.d}</Text>
-            <View style={s.actions}>
-              <Action icon="eye" label="Ocultar" /><Action icon="warning" label="Alerta" /><Action icon="trash" label="Eliminar" />
-            </View>
-          </View>
-        </Card>
-      ))}
+
+      <SearchBar placeholder="Buscar por categoría" />
+
+      <Card>
+
+        <Img
+          src={null}
+          label="Portada del curso"
+          style={{ width: '100%', height: 120, borderRadius: 10 }}
+        />
+
+        <Text style={estilos.titulo}>
+          Inteligencia Artificial y productividad
+        </Text>
+
+        <Text style={estilos.descripcion}>
+          Aprende los aspectos básicos de la IA para impulsar tu productividad diaria
+        </Text>
+
+        <View style={estilos.botones}>
+
+          <Pressable style={estilos.boton}>
+            <Img src={null} label="Ojo" style={estilos.icono} />
+            <Text style={estilos.textoBoton}>Ocultar</Text>
+          </Pressable>
+
+          <Pressable style={estilos.boton}>
+            <Img src={null} label="Alerta" style={estilos.icono} />
+            <Text style={estilos.textoBoton}>Alerta</Text>
+          </Pressable>
+
+          <Pressable style={estilos.boton}>
+            <Img src={null} label="Basura" style={estilos.icono} />
+            <Text style={estilos.textoBoton}>Eliminar</Text>
+          </Pressable>
+
+        </View>
+
+      </Card>
+
+      <Card>
+
+        <Img
+          src={null}
+          label="Portada del curso"
+          style={{ width: '100%', height: 120, borderRadius: 10 }}
+        />
+
+        <Text style={estilos.titulo}>
+          Aprende sobre la programación orientada a objetos
+        </Text>
+
+        <Text style={estilos.descripcion}>
+          Aprende los fundamentos de la Programación Orientada a Objetos para mejorar tus habilidades de programación y crear aplicaciones de manera estructurada.
+        </Text>
+
+        <View style={estilos.botones}>
+
+          <Pressable style={estilos.boton}>
+            <Img src={null} label="Ojo" style={estilos.icono} />
+            <Text style={estilos.textoBoton}>Ocultar</Text>
+          </Pressable>
+
+          <Pressable style={estilos.boton}>
+            <Img src={null} label="Alerta" style={estilos.icono} />
+            <Text style={estilos.textoBoton}>Alerta</Text>
+          </Pressable>
+
+          <Pressable style={estilos.boton}>
+            <Img src={null} label="Basura" style={estilos.icono} />
+            <Text style={estilos.textoBoton}>Eliminar</Text>
+          </Pressable>
+
+        </View>
+
+      </Card>
+
     </Screen>
   );
 }
-const s = StyleSheet.create({
-  cover: { height: 130, backgroundColor: '#FFF6EA', alignItems: 'center', justifyContent: 'center' },
-  name: { fontSize: 15, fontWeight: '600', color: C.text, marginBottom: 4 },
-  desc: { fontSize: 13, color: '#444' },
-  actions: { flexDirection: 'row', justifyContent: 'flex-end', marginTop: 10 },
-  act: { fontSize: 10, color: C.orange, marginTop: 2 },
+
+const estilos = StyleSheet.create({
+
+  titulo: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#333333',
+    marginTop: 10
+  },
+
+  descripcion: {
+    fontSize: 11,
+    color: '#333333',
+    marginTop: 4
+  },
+
+  botones: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    gap: 14,
+    marginTop: 10
+  },
+
+  boton: {
+    alignItems: 'center'
+  },
+
+  icono: {
+    width: 18,
+    height: 18
+  },
+
+  textoBoton: {
+    color: '#F28C28',
+    fontSize: 9
+  }
+
 });
