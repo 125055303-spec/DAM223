@@ -10,7 +10,7 @@ import {
 import {
   Screen,
   Title,
-  Chips,
+  Categorias,
   Card,
   Img
 } from '../components/components';
@@ -18,75 +18,95 @@ import {
 export default function ReportesScreen({ cambiarPantalla }) {
 
   return (
-    <Screen cambiarPantalla={cambiarPantalla}>
+    <Screen cambiarPantalla={cambiarPantalla} contenido={
 
-      <Title>Reportes</Title>
+      <>
 
-      <Chips items={['Recientes', 'Esta semana', 'Más antiguos']} />
+        <Title contenido="Reportes" />
 
-      <Card style={{ padding: 12 }}>
+        <Categorias items={['Recientes', 'Esta semana', 'Más antiguos']} />
 
-        <View style={estilos.encabezado}>
+        <Card contenido={
 
-          <Img src={null} label="Campana" style={estilos.icono} />
+          <View style={{ padding: 12 }}>
 
-          <Text style={estilos.numero}>Reporte #24</Text>
+            <View style={estilos.encabezado}>
 
-          <Pressable style={[estilos.boton, { backgroundColor: '#4CAF50' }]}>
-            <Text style={estilos.textoBoton}>✓</Text>
-          </Pressable>
+              <Img
+                src={require('../assets/bell.png')}
+                label="Campana"
+                style={estilos.icono}
+              />
 
-          <Pressable style={[estilos.boton, { backgroundColor: '#F44336', marginLeft: 6 }]}>
-            <Text style={estilos.textoBoton}>✕</Text>
-          </Pressable>
+              <Text style={estilos.numero}>Reporte #24</Text>
 
-        </View>
+              <Pressable style={[estilos.boton, { backgroundColor: '#4CAF50' }]}>
+                <Text style={estilos.textoBoton}>✓</Text>
+              </Pressable>
 
-        <Text style={estilos.textoNaranja}>Usuario reportado: Carlos Torres</Text>
-        <Text style={estilos.texto}>Reportado por: Ashley López</Text>
-        <Text style={estilos.texto}>Fecha: 02/10/2026</Text>
-        <Text style={estilos.textoNaranja}>Motivo: Contenido inapropiado</Text>
+              <Pressable style={[estilos.boton, { backgroundColor: '#F44336', marginLeft: 6 }]}>
+                <Text style={estilos.textoBoton}>✕</Text>
+              </Pressable>
 
-        <Text style={[estilos.texto, { marginTop: 8 }]}>Descripción:</Text>
+            </View>
 
-        <Text style={estilos.texto}>
-          Quiero reportar esta cuenta porque encontré contenido dentro de uno de sus cursos que considero inapropiado y que no debería estar disponible en la plataforma. Solicito que se revise el contenido y la cuenta.
-        </Text>
+            <Text style={estilos.textoNaranja}>Usuario reportado: Carlos Torres</Text>
+            <Text style={estilos.texto}>Reportado por: Ashley López</Text>
+            <Text style={estilos.texto}>Fecha: 02/10/2026</Text>
+            <Text style={estilos.textoNaranja}>Motivo: Contenido inapropiado</Text>
 
-      </Card>
+            <Text style={[estilos.texto, { marginTop: 8 }]}>Descripción:</Text>
 
-      <Card style={{ padding: 12 }}>
+            <Text style={estilos.texto}>
+              Quiero reportar esta cuenta porque encontré contenido dentro de uno de sus cursos que considero inapropiado y que no debería estar disponible en la plataforma. Solicito que se revise el contenido y la cuenta.
+            </Text>
 
-        <View style={estilos.encabezado}>
+          </View>
 
-          <Img src={null} label="Campana" style={estilos.icono} />
+        } />
 
-          <Text style={estilos.numero}>Reporte #25</Text>
+        <Card contenido={
 
-          <Pressable style={[estilos.boton, { backgroundColor: '#4CAF50' }]}>
-            <Text style={estilos.textoBoton}>✓</Text>
-          </Pressable>
+          <View style={{ padding: 12 }}>
 
-          <Pressable style={[estilos.boton, { backgroundColor: '#F44336', marginLeft: 6 }]}>
-            <Text style={estilos.textoBoton}>✕</Text>
-          </Pressable>
+            <View style={estilos.encabezado}>
 
-        </View>
+              <Img
+                src={require('../assets/bell.png')}
+                label="Campana"
+                style={estilos.icono}
+              />
 
-        <Text style={estilos.textoNaranja}>Usuario reportado: Sofía Ramírez</Text>
-        <Text style={estilos.texto}>Reportado por: Carlos Jimenez</Text>
-        <Text style={estilos.texto}>Fecha: 02/10/2026</Text>
-        <Text style={estilos.textoNaranja}>Motivo: Spam en comentarios</Text>
+              <Text style={estilos.numero}>Reporte #25</Text>
 
-        <Text style={[estilos.texto, { marginTop: 8 }]}>Descripción:</Text>
+              <Pressable style={[estilos.boton, { backgroundColor: '#4CAF50' }]}>
+                <Text style={estilos.textoBoton}>✓</Text>
+              </Pressable>
 
-        <Text style={estilos.texto}>
-          Quiero reportar a este usuario debido a que ha realizado varios comentarios repetitivos que parecen ser spam. Esto dificulta la interacción dentro de los cursos y afecta la experiencia de otros usuarios.
-        </Text>
+              <Pressable style={[estilos.boton, { backgroundColor: '#F44336', marginLeft: 6 }]}>
+                <Text style={estilos.textoBoton}>✕</Text>
+              </Pressable>
 
-      </Card>
+            </View>
 
-    </Screen>
+            <Text style={estilos.textoNaranja}>Usuario reportado: Sofía Ramírez</Text>
+            <Text style={estilos.texto}>Reportado por: Carlos Jimenez</Text>
+            <Text style={estilos.texto}>Fecha: 02/10/2026</Text>
+            <Text style={estilos.textoNaranja}>Motivo: Spam en comentarios</Text>
+
+            <Text style={[estilos.texto, { marginTop: 8 }]}>Descripción:</Text>
+
+            <Text style={estilos.texto}>
+              Quiero reportar a este usuario debido a que ha realizado varios comentarios repetitivos que parecen ser spam. Esto dificulta la interacción dentro de los cursos y afecta la experiencia de otros usuarios.
+            </Text>
+
+          </View>
+
+        } />
+
+      </>
+
+    } />
   );
 }
 

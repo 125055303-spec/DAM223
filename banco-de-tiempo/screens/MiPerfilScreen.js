@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 import {
@@ -7,21 +8,9 @@ import {
   Image
 } from 'react-native';
 
-import {
-  Screen,
-  Title,
-  Img
-} from '../components/components';
-
-import {
-  naranja,
-  naranjaClaro,
-  texto
-} from '../components/colores';
-
 import perfil from '../assets/user.png';
 import contraseña from '../assets/lock.png';
-import rol from '../assets/group.png';
+import rol from '../assets/user.png';
 import seguridad from '../assets/candado.png';
 import acceso from '../assets/login.png';
 import usuario from '../assets/switch.png';
@@ -29,9 +18,9 @@ import usuario from '../assets/switch.png';
 export default function MiPerfilScreen({ cambiarPantalla }) {
 
   return (
-    <Screen cambiarPantalla={cambiarPantalla}>
+    <View style={estilos.contenedor}>
 
-      <Title>Mi perfil</Title>
+      <Text style={estilos.titulo}>Mi perfil</Text>
 
       <Text style={estilos.subtitulo}>
         Administra tu información y consulta tu actividad.
@@ -39,9 +28,8 @@ export default function MiPerfilScreen({ cambiarPantalla }) {
 
       <View style={estilos.contenedorFoto}>
 
-        <Img
-          src={null}
-          label="Foto de perfil"
+        <Image
+          source={perfil}
           style={estilos.foto}
         />
 
@@ -54,12 +42,16 @@ export default function MiPerfilScreen({ cambiarPantalla }) {
       <View style={estilos.fila}>
 
         <View style={[estilos.opcion, { flex: 1.3 }]}>
+          <Image source={seguridad} style={estilos.icono} />
+
           <Text style={estilos.textoOpcion}>
             Cambiar contraseña
           </Text>
         </View>
 
         <View style={[estilos.opcion, { flex: 1 }]}>
+          <Image source={rol} style={estilos.icono} />
+
           <Text style={estilos.textoOpcion}>
             Rol
           </Text>
@@ -70,6 +62,8 @@ export default function MiPerfilScreen({ cambiarPantalla }) {
       <View style={estilos.fila}>
 
         <View style={[estilos.opcion, { flex: 1 }]}>
+          <Image source={contraseña} style={estilos.icono} />
+
           <Text style={estilos.textoOpcion}>
             Configuración de seguridad
           </Text>
@@ -80,12 +74,16 @@ export default function MiPerfilScreen({ cambiarPantalla }) {
       <View style={estilos.fila}>
 
         <View style={[estilos.opcion, { flex: 1 }]}>
+          <Image source={acceso} style={estilos.icono} />
+
           <Text style={estilos.textoOpcion}>
             Acceso
           </Text>
         </View>
 
         <View style={[estilos.opcion, { flex: 1.2 }]}>
+          <Image source={usuario} style={estilos.icono} />
+
           <Text style={estilos.textoOpcion}>
             Cambiar usuario
           </Text>
@@ -93,16 +91,29 @@ export default function MiPerfilScreen({ cambiarPantalla }) {
 
       </View>
 
-    </Screen>
+    </View>
   );
 }
 
 const estilos = StyleSheet.create({
 
+  contenedor: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    padding: 20
+  },
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#E87524',
+    marginBottom: 8
+  },
+
   subtitulo: {
     fontSize: 14,
     fontWeight: '600',
-    color: texto,
+    color: '#555555',
     maxWidth: 260
   },
 
@@ -120,7 +131,7 @@ const estilos = StyleSheet.create({
   editarFoto: {
     fontSize: 13,
     fontWeight: '600',
-    color: texto,
+    color: '#555555',
     marginTop: 8
   },
 
@@ -132,15 +143,24 @@ const estilos = StyleSheet.create({
 
   opcion: {
     borderWidth: 1,
-    borderColor: naranja,
+    borderColor: '#E87524',
     borderRadius: 14,
     paddingVertical: 12,
-    paddingHorizontal: 12
+    paddingHorizontal: 12,
+    alignItems: 'center'
+  },
+
+  icono: {
+    width: 28,
+    height: 28,
+    resizeMode: 'contain',
+    marginBottom: 6
   },
 
   textoOpcion: {
-    color: naranjaClaro,
-    fontSize: 13
+    color: '#F29A52',
+    fontSize: 13,
+    textAlign: 'center'
   }
 
 });

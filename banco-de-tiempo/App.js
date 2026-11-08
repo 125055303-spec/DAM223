@@ -1,6 +1,12 @@
 
 import React, { useState } from 'react';
-import { View, Text, useWindowDimensions } from 'react-native';
+
+import {
+  View,
+  Text,
+  ScrollView,
+  useWindowDimensions
+} from 'react-native';
 
 import LoginScreen from './screens/LoginScreen';
 import InicioAdminScreen from './screens/InicioAdminScreen';
@@ -18,120 +24,118 @@ export default function App() {
 
   const { width } = useWindowDimensions();
 
+  const computadora = width > 760;
+
   let contenido;
 
-  if (pantalla === 'Login') {
-    contenido = <LoginScreen cambiarPantalla={setPantalla} />;
-  }
+if (pantalla === 'Login') {
+  contenido = <LoginScreen cambiarPantalla={setPantalla} />;
+} 
+else if (pantalla === 'Inicio') {
+  contenido = <InicioAdminScreen cambiarPantalla={setPantalla} />;
+}
+else if (pantalla === 'Cursos') {
+  contenido = <CursosScreen cambiarPantalla={setPantalla} />;
+}
+else if (pantalla === 'Usuarios') {
+  contenido = <UsuariosScreen cambiarPantalla={setPantalla} />;
+}
+else if (pantalla === 'Reportes') {
+  contenido = <ReportesScreen cambiarPantalla={setPantalla} />;
+}
+else if (pantalla === 'Solicitudes') {
+  contenido = <SolicitudesScreen cambiarPantalla={setPantalla} />;
+}
+else if (pantalla === 'Graficas') {
+  contenido = <GraficasScreen cambiarPantalla={setPantalla} />;
+}
+else if (pantalla === 'Menu') {
+  contenido = <MenuScreen cambiarPantalla={setPantalla} />;
+}
+else if (pantalla === 'MiPerfil') {
+  contenido = <MiPerfilScreen cambiarPantalla={setPantalla} />;
+}
+else {
+  contenido = <Text>Pantalla no encontrada</Text>;
+}
 
-  if (pantalla === 'Inicio') {
-    contenido = <InicioAdminScreen cambiarPantalla={setPantalla} />;
-  }
-
-  if (pantalla === 'Cursos') {
-    contenido = <CursosScreen cambiarPantalla={setPantalla} />;
-  }
-
-  if (pantalla === 'Usuarios') {
-    contenido = <UsuariosScreen cambiarPantalla={setPantalla} />;
-  }
-
-  if (pantalla === 'Reportes') {
-    contenido = <ReportesScreen cambiarPantalla={setPantalla} />;
-  }
-
-  if (pantalla === 'Solicitudes') {
-    contenido = <SolicitudesScreen cambiarPantalla={setPantalla} />;
-  }
-
-  if (pantalla === 'Graficas') {
-    contenido = <GraficasScreen cambiarPantalla={setPantalla} />;
-  }
-
-  if (pantalla === 'Menu') {
-    contenido = <MenuScreen cambiarPantalla={setPantalla} />;
-  }
-
-  if (pantalla === 'MiPerfil') {
-    contenido = <MiPerfilScreen cambiarPantalla={setPantalla} />;
-  }
+  const opciones = [
+    { nombre: 'Login', pantalla: 'Login' },
+    { nombre: 'Inicio', pantalla: 'Inicio' },
+    { nombre: 'Cursos', pantalla: 'Cursos' },
+    { nombre: 'Usuarios', pantalla: 'Usuarios' },
+    { nombre: 'Reportes', pantalla: 'Reportes' },
+    { nombre: 'Solicitudes', pantalla: 'Solicitudes' },
+    { nombre: 'Gráficas', pantalla: 'Graficas' },
+    { nombre: 'Mi perfil', pantalla: 'MiPerfil' }
+  ];
 
   return (
+
     <View style={{
       flex: 1,
       flexDirection: 'row',
-      backgroundColor: '#2B2B2B',
-      alignItems: 'center',
-      justifyContent: 'center'
+      backgroundColor: '#FFF7EF'
     }}>
 
-      {width > 760 && (
-        <View style={{ width: 200 }}>
+      {/* MENU LATERAL */}
 
-          <Text style={{
-            color: '#FFB066',
-            fontSize: 18,
-            fontWeight: '700',
-            marginBottom: 14
-          }}>
-            Banco de Tiempo
+      <ScrollView
+        style={{
+          width: computadora ? 220 : 105,
+          flexGrow: 0,
+          backgroundColor: '#FF7900'
+        }}
+      >
+
+        <Text style={{
+          color: 'white',
+          fontSize: computadora ? 21 : 13,
+          fontWeight: 'bold',
+          textAlign: 'center',
+          marginTop: 25,
+          marginBottom: 25
+        }}>
+          Banco de Tiempo
+        </Text>
+
+        {opciones.map((opcion, index) => (
+
+          <Text
+            key={index}
+            onPress={() => setPantalla(opcion.pantalla)}
+            style={{
+              backgroundColor:
+                pantalla === opcion.pantalla
+                  ? '#FFAA55'
+                  : '#FF6800',
+
+              color: 'white',
+              fontSize: computadora ? 15 : 11,
+              fontWeight: 'bold',
+              padding: computadora ? 15 : 10,
+              marginHorizontal: 7,
+              marginVertical: 4,
+              borderRadius: 12,
+              borderWidth: 1,
+              borderColor: '#E95B00',
+              textAlign: 'left'
+            }}
+          >
+            {opcion.nombre}
           </Text>
 
-          <Text onPress={() => setPantalla('Login')}
-            style={{ color: 'white', padding: 8 }}>
-            Login
-          </Text>
+        ))}
 
-          <Text onPress={() => setPantalla('Inicio')}
-            style={{ color: 'white', padding: 8 }}>
-            Inicio
-          </Text>
+      </ScrollView>
 
-          <Text onPress={() => setPantalla('Cursos')}
-            style={{ color: 'white', padding: 8 }}>
-            Gestionar cursos
-          </Text>
-
-          <Text onPress={() => setPantalla('Usuarios')}
-            style={{ color: 'white', padding: 8 }}>
-            Gestionar usuarios
-          </Text>
-
-          <Text onPress={() => setPantalla('Reportes')}
-            style={{ color: 'white', padding: 8 }}>
-            Reportes
-          </Text>
-
-          <Text onPress={() => setPantalla('Solicitudes')}
-            style={{ color: 'white', padding: 8 }}>
-            Solicitudes
-          </Text>
-
-          <Text onPress={() => setPantalla('Graficas')}
-            style={{ color: 'white', padding: 8 }}>
-            Gráficas
-          </Text>
-
-          <Text onPress={() => setPantalla('Menu')}
-            style={{ color: 'white', padding: 8 }}>
-            Menú lateral
-          </Text>
-
-          <Text onPress={() => setPantalla('MiPerfil')}
-            style={{ color: 'white', padding: 8 }}>
-            Mi perfil
-          </Text>
-
-        </View>
-      )}
+      {/* CONTENIDO DE LAS PANTALLAS */}
 
       <View style={{
-        width: 390,
-        height: 800,
-        maxHeight: '96%',
-        borderRadius: 30,
-        borderWidth: 6,
-        borderColor: '#111'
+        flex: 1,
+        minWidth: 0,
+        height: '100%',
+        backgroundColor: '#FFF7EF'
       }}>
 
         {contenido}
@@ -139,5 +143,6 @@ export default function App() {
       </View>
 
     </View>
+
   );
 }

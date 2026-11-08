@@ -20,7 +20,7 @@ export default function MenuScreen({ cambiarPantalla }) {
 
           <Pressable onPress={() => cambiarPantalla('MiPerfil')}>
             <Img
-              src={null}
+              src={require('../assets/user.png')}
               label="Perfil"
               style={{ width: 44, height: 44, borderRadius: 22 }}
             />
@@ -31,39 +31,39 @@ export default function MenuScreen({ cambiarPantalla }) {
         <View style={s.panel}>
 
           <Pressable style={s.item} onPress={() => cambiarPantalla('Inicio')}>
-            <Img src={null} label="Casa" style={s.ico} />
+            <Img src={require('../assets/casa.png')} label="Casa" style={s.ico} />
             <Text style={s.txt}>INICIO</Text>
           </Pressable>
 
           <Pressable style={s.item} onPress={() => cambiarPantalla('Cursos')}>
-            <Img src={null} label="Curso" style={s.ico} />
+            <Img src={require('../assets/curso.webp')} label="Curso" style={s.ico} />
             <Text style={s.txt}>CURSOS</Text>
           </Pressable>
 
           <Pressable style={s.item} onPress={() => cambiarPantalla('Usuarios')}>
-            <Img src={null} label="Usuarios" style={s.ico} />
+            <Img src={require('../assets/user.png')} label="Usuarios" style={s.ico} />
             <Text style={s.txt}>USUARIOS</Text>
           </Pressable>
 
           <Pressable style={s.item} onPress={() => cambiarPantalla('Reportes')}>
-            <Img src={null} label="Reportes" style={s.ico} />
+            <Img src={require('../assets/report.png')} label="Reportes" style={s.ico} />
             <Text style={s.txt}>REPORTES</Text>
           </Pressable>
 
           <Pressable style={s.item} onPress={() => cambiarPantalla('Solicitudes')}>
-            <Img src={null} label="Sobre" style={s.ico} />
+            <Img src={require('../assets/lapiz.png')} label="Sobre" style={s.ico} />
             <Text style={s.txt}>SOLICITUDES</Text>
           </Pressable>
 
           <Pressable style={s.item} onPress={() => cambiarPantalla('Graficas')}>
-            <Img src={null} label="Gráfica" style={s.ico} />
+            <Img src={require('../assets/graf.png')} label="Gráfica" style={s.ico} />
             <Text style={s.txt}>GRÁFICAS</Text>
           </Pressable>
 
           <View style={{ flex: 1 }} />
 
           <Pressable style={s.item} onPress={() => cambiarPantalla('Login')}>
-            <Img src={null} label="Salir" style={s.ico} />
+            <Img src={require('../assets/back.png')} label="Salir" style={s.ico} />
             <Text style={s.txt}>CERRAR SESIÓN</Text>
           </Pressable>
 

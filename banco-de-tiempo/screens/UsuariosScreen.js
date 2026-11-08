@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 import {
@@ -10,7 +11,6 @@ import {
   Screen,
   Title,
   SearchBar,
-  Chips,
   Card,
   Img
 } from '../components/components';
@@ -18,105 +18,149 @@ import {
 export default function UsuariosScreen({ cambiarPantalla }) {
 
   return (
-    <Screen cambiarPantalla={cambiarPantalla}>
+    <Screen cambiarPantalla={cambiarPantalla} contenido={
 
-      <Title>Gestionar Usuarios</Title>
+      <>
 
-      <SearchBar placeholder="Buscar por nombre de usuario" />
+        <Title contenido="Gestionar Usuarios" />
 
-      <Chips items={['Maestro', 'Regular', 'Nuevo']} />
+        <SearchBar placeholder="Buscar por nombre de usuario" />
 
-      <Card style={{ padding: 12 }}>
+        <Card style={{ padding: 12 }} contenido={
 
-        <View style={estilos.encabezado}>
-          <Img src={null} label="" style={estilos.correo} />
+          <>
 
-          <Text style={estilos.correoTexto}>ashley.lopez@gmail.com</Text>
+            <View style={estilos.encabezado}>
+              <Img
+                src={require('../assets/user.png')}
+                label=""
+                style={estilos.correo}
+              />
 
-          <Text style={estilos.estrellas}>★★★★★</Text>
-        </View>
+              <Text style={estilos.correoTexto}>
+                ashley.lopez@gmail.com
+              </Text>
 
-        <View style={estilos.usuario}>
+              <Text style={estilos.estrellas}>★★★★★</Text>
+            </View>
 
-          <View style={estilos.foto}>
-            <Img src={null} label="Foto usuario" style={estilos.imagen} />
-            <Text style={estilos.nombre}>Ashley López</Text>
-          </View>
+            <View style={estilos.usuario}>
 
-          <View style={estilos.informacion}>
-            <Text style={estilos.dato}>Usuario Regular</Text>
-            <Text style={estilos.dato}>Inscripciones: 5</Text>
-            <Text style={estilos.dato}>Cursos creados: 2</Text>
-            <Text style={estilos.dato}>Créditos: 200</Text>
-            <Text style={estilos.dato}>Estado: Activo</Text>
-            <Text style={estilos.dato}>Fecha de registro: 02/10/2021</Text>
-          </View>
+              <View style={estilos.foto}>
+                <Img
+                  src={require('../assets/user.png')}
+                  label="Foto usuario"
+                  style={estilos.imagen}
+                />
 
-        </View>
+                <Text style={estilos.nombre}>Ashley López</Text>
+              </View>
 
-      </Card>
+              <View style={estilos.informacion}>
+                <Text style={estilos.dato}>Usuario Regular</Text>
+                <Text style={estilos.dato}>Inscripciones: 5</Text>
+                <Text style={estilos.dato}>Cursos creados: 2</Text>
+                <Text style={estilos.dato}>Créditos: 200</Text>
+                <Text style={estilos.dato}>Estado: Activo</Text>
+                <Text style={estilos.dato}>Fecha de registro: 02/10/2021</Text>
+              </View>
 
-      <Card style={{ padding: 12 }}>
+            </View>
 
-        <View style={estilos.encabezado}>
-          <Img src={null} label="" style={estilos.correo} />
+          </>
+        } />
 
-          <Text style={estilos.correoTexto}>valeria.hrz@gmail.com</Text>
+        <Card style={{ padding: 12 }} contenido={
 
-          <Text style={estilos.estrellas}>★★★★★</Text>
-        </View>
+          <>
 
-        <View style={estilos.usuario}>
+            <View style={estilos.encabezado}>
+              <Img
+                src={require('../assets/user.png')}
+                label=""
+                style={estilos.correo}
+              />
 
-          <View style={estilos.foto}>
-            <Img src={null} label="Foto usuario" style={estilos.imagen} />
-            <Text style={estilos.nombre}>Valeria Hernández</Text>
-          </View>
+              <Text style={estilos.correoTexto}>
+                valeria.hrz@gmail.com
+              </Text>
 
-          <View style={estilos.informacion}>
-            <Text style={estilos.dato}>Usuario Maestro</Text>
-            <Text style={estilos.dato}>Inscripciones: 10</Text>
-            <Text style={estilos.dato}>Cursos creados: 15</Text>
-            <Text style={estilos.dato}>Créditos: 450</Text>
-            <Text style={estilos.dato}>Estado: Activo</Text>
-            <Text style={estilos.dato}>Fecha de registro: 02/10/2019</Text>
-          </View>
+              <Text style={estilos.estrellas}>★★★★★</Text>
+            </View>
 
-        </View>
+            <View style={estilos.usuario}>
 
-      </Card>
+              <View style={estilos.foto}>
+                <Img
+                  src={require('../assets/user.png')}
+                  label="Foto usuario"
+                  style={estilos.imagen}
+                />
 
-      <Card style={{ padding: 12 }}>
+                <Text style={estilos.nombre}>Valeria Hernández</Text>
+              </View>
 
-        <View style={estilos.encabezado}>
-          <Img src={null} label="" style={estilos.correo} />
+              <View style={estilos.informacion}>
+                <Text style={estilos.dato}>Usuario Maestro</Text>
+                <Text style={estilos.dato}>Inscripciones: 10</Text>
+                <Text style={estilos.dato}>Cursos creados: 15</Text>
+                <Text style={estilos.dato}>Créditos: 450</Text>
+                <Text style={estilos.dato}>Estado: Activo</Text>
+                <Text style={estilos.dato}>Fecha de registro: 02/10/2019</Text>
+              </View>
 
-          <Text style={estilos.correoTexto}>danEler2019@gmail.com</Text>
+            </View>
 
-          <Text style={estilos.estrellas}>★★★☆☆</Text>
-        </View>
+          </>
+        } />
 
-        <View style={estilos.usuario}>
+        <Card style={{ padding: 12 }} contenido={
 
-          <View style={estilos.foto}>
-            <Img src={null} label="Foto usuario" style={estilos.imagen} />
-            <Text style={estilos.nombre}>Daniel Martínez</Text>
-          </View>
+          <>
 
-          <View style={estilos.informacion}>
-            <Text style={estilos.dato}>Usuario Nuevo</Text>
-            <Text style={estilos.dato}>Inscripciones: 3</Text>
-            <Text style={estilos.dato}>Cursos creados: 1</Text>
-            <Text style={estilos.dato}>Créditos: 50</Text>
-            <Text style={estilos.dato}>Estado: Activo</Text>
-            <Text style={estilos.dato}>Fecha de registro: 02/10/2026</Text>
-          </View>
+            <View style={estilos.encabezado}>
+              <Img
+                src={require('../assets/user.png')}
+                label=""
+                style={estilos.correo}
+              />
 
-        </View>
+              <Text style={estilos.correoTexto}>
+                danEler2019@gmail.com
+              </Text>
 
-      </Card>
+              <Text style={estilos.estrellas}>★★★☆☆</Text>
+            </View>
 
-    </Screen>
+            <View style={estilos.usuario}>
+
+              <View style={estilos.foto}>
+                <Img
+                  src={require('../assets/user.png')}
+                  label="Foto usuario"
+                  style={estilos.imagen}
+                />
+
+                <Text style={estilos.nombre}>Daniel Martínez</Text>
+              </View>
+
+              <View style={estilos.informacion}>
+                <Text style={estilos.dato}>Usuario Nuevo</Text>
+                <Text style={estilos.dato}>Inscripciones: 3</Text>
+                <Text style={estilos.dato}>Cursos creados: 1</Text>
+                <Text style={estilos.dato}>Créditos: 50</Text>
+                <Text style={estilos.dato}>Estado: Activo</Text>
+                <Text style={estilos.dato}>Fecha de registro: 02/10/2026</Text>
+              </View>
+
+            </View>
+
+          </>
+        } />
+
+      </>
+
+    } />
   );
 }
 

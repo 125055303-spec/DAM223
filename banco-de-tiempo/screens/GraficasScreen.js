@@ -29,77 +29,84 @@ export default function GraficasScreen({ cambiarPantalla }) {
   ];
 
   return (
-    <Screen cambiarPantalla={cambiarPantalla}>
+    <Screen cambiarPantalla={cambiarPantalla} contenido={
 
-      <Title>Gráficas</Title>
+      <>
 
-      <Text style={estilos.titulo}>
-        Cursos más populares
-      </Text>
+        <Title contenido="Gráficas" />
 
-      <Text style={estilos.descripcion}>
-        Cantidad de usuarios inscritos en cada curso
-      </Text>
+        <Text style={estilos.titulo}>
+          Cursos más populares
+        </Text>
 
-      {cursosPopulares.map((curso, indice) => (
-        <View key={indice} style={estilos.contenedorBarra}>
+        <Text style={estilos.descripcion}>
+          Cantidad de usuarios inscritos en cada curso
+        </Text>
 
-          <Text style={estilos.nombre}>
-            {curso[0]}
-          </Text>
+        {cursosPopulares.map((curso, indice) => (
 
-          <View style={estilos.fondoBarra}>
-            <View
-              style={[
-                estilos.barra,
-                { width: `${(curso[1] / 140) * 100}%` }
-              ]}
-            />
+          <View key={indice} style={estilos.contenedorBarra}>
+
+            <Text style={estilos.nombre}>
+              {curso[0]}
+            </Text>
+
+            <View style={estilos.fondoBarra}>
+              <View
+                style={[
+                  estilos.barra,
+                  { width: `${(curso[1] / 140) * 100}%` }
+                ]}
+              />
+            </View>
+
+            <Text style={estilos.cantidad}>
+              {curso[1]}
+            </Text>
+
           </View>
+        ))}
 
-          <Text style={estilos.cantidad}>
-            {curso[1]}
-          </Text>
+        <Text style={estilos.titulo}>
+          Usuarios activos por mes
+        </Text>
 
-        </View>
-      ))}
+        <Text style={estilos.descripcion}>
+          Cantidad de usuarios que realizaron alguna actividad en la plataforma durante cada mes.
+        </Text>
 
-      <Text style={estilos.titulo}>
-        Usuarios activos por mes
-      </Text>
+        {usuariosPorMes.map((mes, indice) => (
 
-      <Text style={estilos.descripcion}>
-        Cantidad de usuarios que realizaron alguna actividad en la plataforma durante cada mes.
-      </Text>
+          <View key={indice} style={estilos.contenedorBarra}>
 
-      {usuariosPorMes.map((mes, indice) => (
-        <View key={indice} style={estilos.contenedorBarra}>
+            <Text style={estilos.nombre}>
+              {mes[0]}
+            </Text>
 
-          <Text style={estilos.nombre}>
-            {mes[0]}
-          </Text>
+            <View style={estilos.fondoBarra}>
+              <View
+                style={[
+                  estilos.barra,
+                  { width: `${(mes[1] / 250) * 100}%` }
+                ]}
+              />
+            </View>
 
-          <View style={estilos.fondoBarra}>
-            <View
-              style={[
-                estilos.barra,
-                { width: `${(mes[1] / 250) * 100}%` }
-              ]}
-            />
+            <Text style={estilos.cantidad}>
+              {mes[1]}
+            </Text>
+
           </View>
+        ))}
 
-          <Text style={estilos.cantidad}>
-            {mes[1]}
-          </Text>
+      </>
 
-        </View>
-      ))}
-
-    </Screen>
+    } />
   );
 }
 
 const estilos = {
+
   titulo: {
     fontWeight: '700',
     fontSize: 15,
@@ -141,4 +148,5 @@ const estilos = {
     textAlign: 'right',
     marginTop: 2
   }
+
 };

@@ -1,8 +1,10 @@
+
 import React from 'react';
 
 import {
   View,
-  Text
+  Text,
+  Image
 } from 'react-native';
 
 import {
@@ -13,92 +15,111 @@ import {
 export default function InicioAdminScreen({ cambiarPantalla }) {
 
   return (
-    <Screen cambiarPantalla={cambiarPantalla}>
+    <Screen cambiarPantalla={cambiarPantalla} contenido={
 
-      <Title>¡Bienvenido{"\n"}Administrador!</Title>
+      <>
 
-      <Text style={{
-        fontWeight: '700',
-        fontSize: 14,
-        marginTop: 14,
-        marginBottom: 10
-      }}>
-        Cursos MEJOR valorados
-      </Text>
+        <View style={{
+          alignItems: 'center',
+          marginBottom: 15
+        }}>
+          <Image
+            source={require('../assets/user.png')}
+            style={{
+              width: 110,
+              height: 110,
+              borderRadius: 55
+            }}
+            resizeMode="contain"
+          />
+        </View>
 
-      <View>
-        {[
-          ['Diseño UX/UI', 5],
-          ['Python', 4.8],
-          ['Programación Web', 4.7],
-          ['Bases de Datos', 4.6],
-          ['Java', 4.5]
-        ].map((curso, indice) => (
+        <Title contenido={'¡Bienvenido\nAdministrador!'} />
 
-          <View key={indice} style={{ marginBottom: 10 }}>
+        <Text style={{
+          fontWeight: '700',
+          fontSize: 14,
+          marginTop: 14,
+          marginBottom: 10
+        }}>
+          Cursos MEJOR valorados
+        </Text>
 
-            <Text style={{ fontSize: 13 }}>
-              {curso[0]} - {curso[1]}
-            </Text>
+        <View>
+          {[
+            ['Diseño UX/UI', 5],
+            ['Python', 4.8],
+            ['Programación Web', 4.7],
+            ['Bases de Datos', 4.6],
+            ['Java', 4.5]
+          ].map((curso, indice) => (
 
-            <View style={{
-              height: 12,
-              backgroundColor: '#EEEEEE',
-              borderRadius: 6
-            }}>
+            <View key={indice} style={{ marginBottom: 10 }}>
+
+              <Text style={{ fontSize: 13 }}>
+                {curso[0]} - {curso[1]}
+              </Text>
+
               <View style={{
                 height: 12,
-                width: `${curso[1] * 20}%`,
-                backgroundColor: '#F28C28',
+                backgroundColor: '#EEEEEE',
                 borderRadius: 6
-              }} />
+              }}>
+                <View style={{
+                  height: 12,
+                  width: `${curso[1] * 20}%`,
+                  backgroundColor: '#F28C28',
+                  borderRadius: 6
+                }} />
+              </View>
+
             </View>
+          ))}
+        </View>
 
-          </View>
-        ))}
-      </View>
+        <Text style={{
+          fontWeight: '700',
+          fontSize: 14,
+          marginTop: 10,
+          marginBottom: 10
+        }}>
+          Cursos PEOR valorados
+        </Text>
 
-      <Text style={{
-        fontWeight: '700',
-        fontSize: 14,
-        marginTop: 10,
-        marginBottom: 10
-      }}>
-        Cursos PEOR valorados
-      </Text>
+        <View>
+          {[
+            ['Intro a C++', 2.8],
+            ['Matemáticas Bás.', 3],
+            ['Redes Informáticas', 3.2],
+            ['Fundamentos de I.', 3.4],
+            ['Ofimática', 3.6]
+          ].map((curso, indice) => (
 
-      <View>
-        {[
-          ['Intro a C++', 2.8],
-          ['Matemáticas Bás.', 3],
-          ['Redes Informáticas', 3.2],
-          ['Fundamentos de I.', 3.4],
-          ['Ofimática', 3.6]
-        ].map((curso, indice) => (
+            <View key={indice} style={{ marginBottom: 10 }}>
 
-          <View key={indice} style={{ marginBottom: 10 }}>
+              <Text style={{ fontSize: 13 }}>
+                {curso[0]} - {curso[1]}
+              </Text>
 
-            <Text style={{ fontSize: 13 }}>
-              {curso[0]} - {curso[1]}
-            </Text>
-
-            <View style={{
-              height: 12,
-              backgroundColor: '#EEEEEE',
-              borderRadius: 6
-            }}>
               <View style={{
                 height: 12,
-                width: `${curso[1] * 20}%`,
-                backgroundColor: '#F28C28',
+                backgroundColor: '#EEEEEE',
                 borderRadius: 6
-              }} />
+              }}>
+                <View style={{
+                  height: 12,
+                  width: `${curso[1] * 20}%`,
+                  backgroundColor: '#F28C28',
+                  borderRadius: 6
+                }} />
+              </View>
+
             </View>
+          ))}
+        </View>
 
-          </View>
-        ))}
-      </View>
+      </>
 
-    </Screen>
+    } />
   );
 }

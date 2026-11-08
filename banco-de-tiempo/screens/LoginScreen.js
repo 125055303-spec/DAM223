@@ -1,86 +1,205 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 
 import {
   View,
   Text,
   TextInput,
   Pressable,
-  StyleSheet
+  StyleSheet,
+  Image,
+  ScrollView,
+  Alert
 } from 'react-native';
-
-import { Screen, Img } from '../components/components';
 
 export default function LoginScreen({ cambiarPantalla }) {
 
+  const [usuario, setUsuario] = useState('');
+  const [contrasena, setContrasena] = useState('');
+
+  function iniciarSesion() {
+
+    if (usuario.trim() === '' || contrasena.trim() === '') {
+      Alert.alert('Atención', 'Ingresa tu usuario y contraseña.');
+      return;
+    }
+
+    Alert.alert(
+      'Inicio de sesión',
+      'No se pudo validar el acceso. Primero debemos conectar la validación de usuarios.'
+    );
+  }
+
+  function registrarse() {
+
+    if (usuario.trim() === '' || contrasena.trim() === '') {
+      Alert.alert('Atención', 'Completa los campos para registrarte.');
+      return;
+    }
+
+    Alert.alert(
+      'Registro',
+      'El registro todavía no está conectado. Puedes continuar en esta pantalla.'
+    );
+  }
+
   return (
-    <Screen cambiarPantalla={cambiarPantalla} header={false}>
 
-      <View style={{
-        alignItems: 'center',
-        marginTop: 40,
-        marginBottom: 40
-      }}>
+    <ScrollView
+      contentContainerStyle={s.contenedor}
+      keyboardShouldPersistTaps="handled"
+    >
 
-        <Img
-          src={null}
-          label="Logo / icono de usuario"
-          style={{ width: 170, height: 170, borderRadius: 85 }}
-        />
+      <View style={s.formulario}>
 
-      </View>
+        <View style={s.logo}>
 
-      <Text style={s.label}>Nombre de Usuario</Text>
+          <Image
+            source={require('../assets/user.png')}
+            style={s.imagen}
+            resizeMode="contain"
+          />
 
-      <TextInput style={s.input} />
-
-      <Text style={s.label}>Contraseña</Text>
-
-      <TextInput
-        style={s.input}
-        secureTextEntry
-      />
-
-      <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 18
-      }}>
-
-        <View style={s.check}>
-          <Text style={{ color: '#fff', fontWeight: '700' }}>✓</Text>
         </View>
 
-        <Text style={s.label2}>Recuérdame</Text>
+        <Text style={s.titulo}>
+          Banco de Tiempo
+        </Text>
+
+        <Text style={s.subtitulo}>
+          Bienvenido
+        </Text>
+
+        <Text style={s.label}>
+          Nombre de usuario
+        </Text>
+
+        <TextInput
+          style={s.input}
+          placeholder="Ingresa tu usuario"
+          placeholderTextColor="#999"
+          value={usuario}
+          onChangeText={setUsuario}
+          autoCapitalize="none"
+        />
+
+        <Text style={s.label}>
+          Contraseña
+        </Text>
+
+        <TextInput
+          style={s.input}
+          placeholder="Ingresa tu contraseña"
+          placeholderTextColor="#999"
+          value={contrasena}
+          onChangeText={setContrasena}
+          secureTextEntry
+        />
+
+        <View style={s.recordar}>
+
+          <View style={s.check}>
+            <Text style={{ color: '#fff', fontWeight: 'bold' }}>
+              ✓
+            </Text>
+          </View>
+
+          <Text style={s.label2}>
+            Recuérdame
+          </Text>
+
+        </View>
+
+        <Pressable
+          style={s.btn}
+          onPress={iniciarSesion}
+        >
+          <Text style={s.btnTxt}>
+            Iniciar sesión
+          </Text>
+        </Pressable>
+
+        <Pressable onPress={registrarse}>
+          <Text style={s.link}>
+            ¿No tienes cuenta? Regístrate
+          </Text>
+        </Pressable>
+
+        <Text style={s.link}>
+          ¿Olvidaste tu contraseña?
+        </Text>
 
       </View>
 
-      <Pressable
-        style={s.btn}
-        onPress={() => cambiarPantalla('Inicio')}
-      >
-        <Text style={s.btnTxt}>Regístrate</Text>
-      </Pressable>
+    </ScrollView>
 
-      <Text style={s.link}>¿Olvidaste tu contraseña?</Text>
-
-    </Screen>
   );
 }
 
 const s = StyleSheet.create({
 
+  contenedor: {
+    flexGrow: 1,
+    backgroundColor: '#FFF7EF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20
+  },
+
+  formulario: {
+    width: '100%',
+    maxWidth: 430,
+    padding: 25,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 25
+  },
+
+  logo: {
+    alignItems: 'center',
+    marginBottom: 20
+  },
+
+  imagen: {
+    width: 125,
+    height: 125,
+    borderRadius: 62
+  },
+
+  titulo: {
+    color: '#F28C28',
+    fontSize: 26,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+
+  subtitulo: {
+    color: '#333',
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: 12,
+    marginBottom: 15
+  },
+
   label: {
     color: '#F28C28',
     fontSize: 15,
-    marginTop: 18
+    marginTop: 18,
+    fontWeight: '600'
   },
 
   input: {
     borderBottomWidth: 1,
     borderBottomColor: '#F8C58A',
-    height: 36,
+    height: 45,
     fontSize: 15,
-    color: '#333333'
+    color: '#333',
+    paddingHorizontal: 5
+  },
+
+  recordar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20
   },
 
   check: {
@@ -101,23 +220,23 @@ const s = StyleSheet.create({
   btn: {
     backgroundColor: '#F28C28',
     borderRadius: 26,
-    height: 50,
+    minHeight: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 34
+    marginTop: 30
   },
 
   btnTxt: {
     color: '#fff',
-    fontSize: 19,
+    fontSize: 18,
     fontWeight: '600'
   },
 
   link: {
     color: '#F28C28',
     textAlign: 'center',
-    marginTop: 18,
-    fontSize: 15
+    marginTop: 20,
+    fontSize: 14
   }
 
 });
