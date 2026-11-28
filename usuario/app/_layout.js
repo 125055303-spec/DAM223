@@ -17,7 +17,6 @@ export default function RootLayout() {
     options={{title:"Cambios de usuario"}}
       />
 
-
   </Stack>
   );
 }
